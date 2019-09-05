@@ -55,9 +55,10 @@ class BaseVectorizer():
 
         self.vocabulary_ = {}
         self.vocabulary_['_PAD_'] = 0  # 빈칸 채우는 심볼
-        self.vocabulary_['_STA_'] = 1  # 디코드 입력 시퀀스의 시작 심볼
-        self.vocabulary_['_EOS_'] = 2  # 디코드 입출력 시퀀스의 종료 심볼
-        self.vocabulary_['_UNK_'] = 3  # 사전에 없는 단어를 나타내는 심볼
+        self.vocabulary_['_UNK_'] = 1  # 사전에 없는 단어를 나타내는 심볼
+        self.vocabulary_['_STA_'] = 2  # 디코드 입력 시퀀스의 시작 심볼
+        self.vocabulary_['_EOS_'] = 3  # 디코드 입출력 시퀀스의 종료 심볼
+       
 
         self.vocabulary_.update({term: idx + 4 for idx, (term, _) in enumerate(
             sorted(vocabs.items(), key=lambda x: -x[1]))})
@@ -176,3 +177,10 @@ class BaseVectorizer():
         self.idx2vocab = vocabulary_list
         self.vocabulary_ = {v: i for i, v in enumerate(self.idx2vocab)}
         self.n_vocabs = len(self.idx2vocab)
+
+    def get_char2idx(self):
+        self.char2idx = {'_PAD_' : 0, '_UNK_' : 1}        
+        for word in self.idx2vocab:
+            for char in word:
+                if char not in self.char2idx:
+                    self.char2idx[char] = len(self.char2idx)

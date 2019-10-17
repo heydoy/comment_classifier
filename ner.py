@@ -15,19 +15,19 @@ class Parser:
         if loc == None:
             self.model = load_model("models/model.h5")
             # loading word2Idx
-            self.word2Idx = np.load("models/word2Idx.npy").item()
+            self.word2Idx = np.load("models/word2Idx.npy", allow_pickle=True).item()
             # loading idx2Label
-            self.idx2Label = np.load("models/idx2Label.npy")
+            self.idx2Label = np.load("models/idx2Label.npy", allow_pickle=True)
             # loading char2Idx
-            self.char2Idx = np.load("models/char2Idx.npy").item()
+            self.char2Idx = np.load("models/char2Idx.npy", allow_pickle=True).item()
         else:
             self.model = load_model(os.path.join(loc,"model.h5"))
             # loading word2Idx
-            self.word2Idx = np.load(os.path.join(loc, "models/word2Idx.npy")).item()
+            self.word2Idx = np.load(os.path.join(loc, "models/word2Idx.npy"), allow_pickle=True).item()
             # loading idx2Label
-            self.idx2Label = np.load(os.path.join(loc, "models/idx2Label.npy")).item()
+            self.idx2Label = np.load(os.path.join(loc, "models/idx2Label.npy"), allow_pickle=True).item()
             # loading char2Idx
-            self.char2Idx = np.load(os.path.join(loc, "models/char2Idx.npy")).item()
+            self.char2Idx = np.load(os.path.join(loc, "models/char2Idx.npy"), allow_pickle=True).item()
     def createTensor(self,sentence, word2Idx, char2Idx):
         unknownIdx = word2Idx['_UNK_']
     
